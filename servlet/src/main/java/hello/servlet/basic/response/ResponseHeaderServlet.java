@@ -53,5 +53,4 @@ public class ResponseHeaderServlet extends HttpServlet {
         response.setCharacterEncoding("utf-8");
 //        response.setContentLength(2); //생략시 자동 생성됨
     }
-
 }
