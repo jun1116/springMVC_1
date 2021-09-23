@@ -17,7 +17,7 @@ public class RequestHeaderServlet extends HttpServlet {
 //        super.service(req, resp);
 //        printStartLine(request);
 //        printHeaders2(request);
-        printHeaderUtils(request);
+//        printHeaderUtils(request);
     }
 
     private void printStartLine(HttpServletRequest request) {
