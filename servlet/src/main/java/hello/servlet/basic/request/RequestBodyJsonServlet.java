@@ -1,5 +1,7 @@
 package hello.servlet.basic.request;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
+import hello.servlet.basic.HelloData.HelloData;
 import org.springframework.util.StreamUtils;
 
 import javax.servlet.ServletException;
@@ -16,10 +18,18 @@ public class RequestBodyJsonServlet extends HttpServlet {
     @Override
     protected void service(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 //        super.service(req, resp);
+
+        ObjectMapper objectMapper = new ObjectMapper(); //HelloData에 맞게 변환하기
+        
         ServletInputStream inputStream = req.getInputStream();
         String messageBody = StreamUtils.copyToString(inputStream, StandardCharsets.UTF_8);
 
         System.out.println("messageBody = " + messageBody);
         resp.getWriter().write("JSON OKEY\n" + messageBody);
+
+        //HelloData 의 형태로 바꿔줄 수 있다
+        HelloData helloData = objectMapper.readValue(messageBody, HelloData.class);
+        System.out.println("helloData = " + helloData);
+
     }
 }

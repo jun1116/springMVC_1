@@ -7,4 +7,12 @@ import lombok.Setter;
 public class HelloData {
     private String username;
     private int age;
+
+    @Override
+    public String toString() {
+        return "HelloData{" +
+                "username='" + username + '\'' +
+                ", age=" + age +
+                '}';
+    }
 }
