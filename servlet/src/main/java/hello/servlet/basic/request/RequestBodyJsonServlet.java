@@ -20,7 +20,7 @@ public class RequestBodyJsonServlet extends HttpServlet {
 //        super.service(req, resp);
 
         ObjectMapper objectMapper = new ObjectMapper(); //HelloData에 맞게 변환하기
-        
+
         ServletInputStream inputStream = req.getInputStream();
         String messageBody = StreamUtils.copyToString(inputStream, StandardCharsets.UTF_8);
 
