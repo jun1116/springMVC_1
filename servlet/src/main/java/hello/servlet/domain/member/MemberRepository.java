@@ -14,7 +14,7 @@ public class MemberRepository {
      * 조회는 무조건 getInstance()로 해야해 **/
     private static final MemberRepository instance = new MemberRepository();
 
-    private static MemberRepository getInstance() {
+    public static MemberRepository getInstance() {
         return instance;
     }
     private MemberRepository(){}
