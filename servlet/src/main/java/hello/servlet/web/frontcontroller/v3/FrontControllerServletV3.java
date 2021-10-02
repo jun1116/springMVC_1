@@ -25,31 +25,36 @@ public class FrontControllerServletV3 extends HttpServlet {
     }
 
     @Override
-    protected void service(HttpServletRequest request, HttpServletResponse
-            response)
+    protected void service(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         String requestURI = request.getRequestURI();
+        System.out.println("--requestURI = " + requestURI);
         ControllerV3 controller = controllerMap.get(requestURI);
         if (controller == null) {
+            System.out.println("NULL?? WTF");
             response.setStatus(HttpServletResponse.SC_NOT_FOUND);
             return;
         }
+        System.out.println("FrontControllerServletV3.service");
         Map<String, String> paramMap = createParamMap(request);
         ModelView mv = controller.process(paramMap);
         String viewName = mv.getViewName();
+        System.out.println("viewName = " + viewName);
         MyView view = viewResolver(viewName);
         view.render(mv.getModel(), request, response);
     }
 
     private MyView viewResolver(String viewName) {
-//        System.out.println("viewName = " + viewName);
-        return new MyView("WEB-INF/views/" + viewName + ".jsp");
+        System.out.println("뷰리졸버- viewName = " + viewName);
+        return new MyView("/WEB-INF/views/" + viewName + ".jsp");
+//        return new MyView("WEB-INF/views/" + viewName + ".jsp");
     }
 
     private Map<String, String> createParamMap(HttpServletRequest request) {
-        Map<String, String> pa = new HashMap<>();
+        Map<String, String> paramMap = new HashMap<>();
         request.getParameterNames().asIterator()
-                .forEachRemaining(paramName -> pa.put(paramName, request.getParameter(paramName)));
-        return pa;
+                .forEachRemaining(paramName -> paramMap.put(paramName,
+                        request.getParameter(paramName)));
+        return paramMap;
     }
 }
