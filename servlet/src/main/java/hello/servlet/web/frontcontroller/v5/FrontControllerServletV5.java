@@ -26,6 +26,7 @@ public class FrontControllerServletV5 extends HttpServlet {
         initHandlerMappingMap();
         initHandlerAdapters();
     }
+    //V3버전을 매핑시켜줌
     private void initHandlerMappingMap() {
         handlerMappingMap.put("/front-controller/v5/v3/members/new-form", new MemberFormControllerV3());
         handlerMappingMap.put("/front-controller/v5/v3/members/save", new MemberSaveControllerV3());
@@ -40,7 +41,7 @@ public class FrontControllerServletV5 extends HttpServlet {
         //== 1. 핸들러 조회 (핸들러매핑정보에서 핸들러 조회하기) ==//
         Object handler = getHandler(request);
         if (handler == null) {
-            response.setS작ptatus(HttpServletResponse.SC_NOT_FOUND);
+            response.setStatus(HttpServletResponse.SC_NOT_FOUND);
             return;
         }
         //== 2. 핸들러어댑터 목록에서 해당핸들러를 처리할수있는 어댑터 조회 ==//
