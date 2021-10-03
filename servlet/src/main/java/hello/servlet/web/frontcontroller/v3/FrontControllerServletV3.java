@@ -28,26 +28,25 @@ public class FrontControllerServletV3 extends HttpServlet {
     protected void service(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         String requestURI = request.getRequestURI();
-        System.out.println("--requestURI = " + requestURI);
+//        System.out.println("--requestURI = " + requestURI);
         ControllerV3 controller = controllerMap.get(requestURI);
         if (controller == null) {
-            System.out.println("NULL?? WTF");
+//            System.out.println("NULL?? WTF");
             response.setStatus(HttpServletResponse.SC_NOT_FOUND);
             return;
         }
-        System.out.println("FrontControllerServletV3.service");
+//        System.out.println("FrontControllerServletV3.service");
         Map<String, String> paramMap = createParamMap(request);
         ModelView mv = controller.process(paramMap);
         String viewName = mv.getViewName();
-        System.out.println("viewName = " + viewName);
+//        System.out.println("viewName = " + viewName);
         MyView view = viewResolver(viewName);
         view.render(mv.getModel(), request, response);
     }
 
     private MyView viewResolver(String viewName) {
-        System.out.println("뷰리졸버- viewName = " + viewName);
+//        System.out.println("뷰리졸버- viewName = " + viewName);
         return new MyView("/WEB-INF/views/" + viewName + ".jsp");
-//        return new MyView("WEB-INF/views/" + viewName + ".jsp");
     }
 
     private Map<String, String> createParamMap(HttpServletRequest request) {
