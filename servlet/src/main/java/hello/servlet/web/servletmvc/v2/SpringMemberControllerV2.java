@@ -10,16 +10,16 @@ import javax.servlet.http.HttpServletRequest;
 import java.util.List;
 
 @Controller
-//@RequestMaapping("/springmvc/v2/members")
+@RequestMapping("/springmvc/v2/members")
 public class SpringMemberControllerV2 {
     private MemberRepository memberRepository = MemberRepository.getInstance();
 
-    @RequestMapping("/springmvc/v2/members/new-form")
+    @RequestMapping("/new-form")
     public ModelAndView newForm(){
         return new ModelAndView("new-form");
     }
 
-    @RequestMapping("/springmvc/v2/members/save")
+    @RequestMapping("/save")
     public ModelAndView save(HttpServletRequest request) {
         String username = request.getParameter("username");
         int age = Integer.parseInt(request.getParameter("age"));
@@ -32,7 +32,8 @@ public class SpringMemberControllerV2 {
         return mv;
     }
 
-    @RequestMapping("/springmvc/v2/members")
+    //springmvc/v2/members 로 가면 여기가 호출됨!
+    @RequestMapping
     public ModelAndView members() {
         List<Member> members = memberRepository.findAll();
         ModelAndView modelAndView = new ModelAndView("members");
