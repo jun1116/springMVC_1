@@ -20,14 +20,9 @@ public class MyView {
     public void render(Map<String, Object> model, HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         /** render가 오면 model에 있는걸 request의 setAttribute로 다 넣어줘
          *  그 다음, JSP로 포워드**/
-        System.out.println("MyView.render");
-        System.out.println("model = " + model);
-        System.out.println("viewPath = " + viewPath);
-        System.out.println("render에서의 requestURI = " + request.getRequestURI());
         modelToRequestAttribute(model, request);
         RequestDispatcher requestDispatcher = request.getRequestDispatcher(viewPath);
         requestDispatcher.forward(request,response);
-        System.out.println("포워딩");
     }
 
     private void modelToRequestAttribute(Map<String, Object> model, HttpServletRequest request) {
