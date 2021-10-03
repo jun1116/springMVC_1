@@ -11,4 +11,10 @@ public class ServletApplication {
 		SpringApplication.run(ServletApplication.class, args);
 	}
 
+	//스프링 빈 직접등록
+//	@Bean
+//	TestController testController(){
+//		return new TestController();
+//	}
+
 }
