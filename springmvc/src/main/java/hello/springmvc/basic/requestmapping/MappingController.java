@@ -1,5 +1,6 @@
 package hello.springmvc.basic.requestmapping;
 
+import hello.springmvc.basic.HelloData;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.http.MediaType;
@@ -77,5 +78,26 @@ public class MappingController {
     public String mappingProduces() {
         log.info("mappingProduces");
         return "ok";
+    }
+/**
+ * 1. `HelloData` 객체 생성
+ * 2. 요청 파라미터의 이름으로 `HelloData` 객체의 프로퍼티를 찾는다.
+ * 그리고 해당 프로퍼티의 setter를 호출해서 파라미터 값을 입력(바인딩)한다.
+ * ex. 파라미터이름이 `username`이면 `setUsername()` 메서드를 찾아서 호출하면서 값을 입력 **/
+    @ResponseBody
+    @RequestMapping("/model-attribute-v1")
+    public String modelAttributeV1(@ModelAttribute HelloData helloData) {
+        log.info("ModelAttribute userId={}, orderId={}", helloData.getUsername(), helloData.getAge());
+        return "OK "+helloData.getUsername()+"\t"+helloData.getAge();
+    }
+    /** @ModelAttribute 생략 가능
+     *  생략시 !!
+     *  String, int 같은 단순 타입 = @RequestParam
+     *  argument resolver로 지정해둔 타입 외 = @ModelAttribute**/
+    @ResponseBody
+    @RequestMapping("/model-attribute-v2")
+    public String modelAttributeV2(HelloData helloData) {
+        log.info("ModelAttribute userId={}, orderId={}", helloData.getUsername(), helloData.getAge());
+        return "OK "+helloData.getUsername()+"\t"+helloData.getAge();
     }
 }
