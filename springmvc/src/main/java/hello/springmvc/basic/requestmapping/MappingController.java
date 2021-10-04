@@ -9,19 +9,19 @@ import org.springframework.web.bind.annotation.*;
 public class MappingController {
     private Logger log = LoggerFactory.getLogger(this.getClass());
 
-    @GetMapping("/mapping/{userId}")
+    @GetMapping("/media/mapping/{userId}")
     public String mappingPath(@PathVariable("userId") String userId) {
         log.info("mappingPath : userId={}", userId);
         return "OK " + userId;
     }
     /** PathVariable의 () 생략 -> 파라미터명이 같을 떄 **/
-    @GetMapping("/mapping2/{userId}")
+    @GetMapping("/media/mapping2/{userId}")
     public String mapping2Path(@PathVariable String userId) {
         log.info("mappingPath : userId={}", userId);
         return "OK " + userId;
     }
     /** 다중 매핑 **/
-    @GetMapping("/mapping/users/{userId}/orders/{orderId}")
+    @GetMapping("/mapping2/users/{userId}/orders/{orderId}")
     public String mappingPath(@PathVariable String userId, @PathVariable Long orderId) {
         log.info("mappingPath userId={}, orderId={}",userId,orderId);
         return "OK " + userId+" 의 " +orderId + "번째 주문건 입니다.";
@@ -60,8 +60,8 @@ public class MappingController {
      * consumes="*\/*"
      * MediaType.APPLICATION_JSON_VALUE
      */
-//    @PostMapping(value = "/mapping-consume", consumes = "application/json")
-    @PostMapping(value = "/mapping-consume", consumes = MediaType.APPLICATION_JSON_VALUE)
+    @PostMapping(value = "/mapping-consume", consumes = "application/json")
+//    @PostMapping(value = "/mapping-consume", consumes = MediaType.APPLICATION_JSON_VALUE)
     public String mappingConsumes(@RequestBody String userId) {
         log.info("mappingConsumes, {}",userId);
         return "ok";
