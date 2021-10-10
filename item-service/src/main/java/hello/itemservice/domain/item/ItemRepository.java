@@ -9,15 +9,13 @@ import java.util.Map;
 
 @Repository
 public class ItemRepository {
-    private static Map<Long, Item> store = new HashMap<>();//static
+    private static Map<Long, Item> store = new HashMap<>(); //static (HashMap말고, Concurrent~~ 이런거 써야해 )
     private static long sequence = 0L; //static
-
     public Item save(Item item) {
         item.setId(++sequence);
         store.put(item.getId(), item);
         return item;
     }
-
     public Item findById(Long id) {
         return store.get(id);
     }
