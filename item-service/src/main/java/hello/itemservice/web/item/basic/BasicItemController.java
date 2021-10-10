@@ -62,12 +62,20 @@ public class BasicItemController {
         itemRepository.save(item);
         return "basic/item";
     }
-
+    @PostMapping("/add")
     public String addItemV4(Item item){//Item -> item 의 이름으로 모델에 담기게돼!
         itemRepository.save(item);
         return "basic/item";
     }
 
+    @GetMapping("/{itemId}/edit")
+    public String editForm(@PathVariable Long itemId, Model model) {
+        Item item = itemRepository.findById(itemId);
+        model.addAttribute("item", item);
+        return "basic/editForm";
+    }
+
+//    @PostMapping("/{itemId}/edit")
 
 
     /** For Testing Data **/
