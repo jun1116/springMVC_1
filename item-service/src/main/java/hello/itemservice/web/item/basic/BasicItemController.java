@@ -35,16 +35,40 @@ public class BasicItemController {
         return "basic/addForm";
     }
 
-    @PostMapping("/add")
+//    @PostMapping("/add")
     public String addItemV1(@RequestParam String itemName,
                             @RequestParam int price,
                             @RequestParam Integer quantity,
                             Model model){
         Item item = new Item(itemName, price, quantity);
         itemRepository.save(item);
+
+        /** 저장된 결과물만 넘겨주면 됨 **/
         model.addAttribute("item", item);
         return "basic/item";
     }
+
+    /** 상품등록처리 ModelAttribute 사용하기 **/
+//    @PostMapping("/add")
+    public String addItemV2(@ModelAttribute("item") Item item, Model model){
+        itemRepository.save(item);
+        /** 저장된 결과물만 넘겨주면 됨 **/
+//        model.addAttribute("item", item);//자동 추가, 생략 가능
+        return "basic/item";
+    }
+
+//    @PostMapping("/add")
+    public String addItemV3(@ModelAttribute Item item, Model model){//Item -> item 의 이름으로 모델에 담기게돼!
+        itemRepository.save(item);
+        return "basic/item";
+    }
+
+    public String addItemV4(Item item){//Item -> item 의 이름으로 모델에 담기게돼!
+        itemRepository.save(item);
+        return "basic/item";
+    }
+
+
 
     /** For Testing Data **/
     @PostConstruct
