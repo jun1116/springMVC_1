@@ -53,7 +53,7 @@ public class BasicItemController {
 //    @PostMapping("/add")
     public String addItemV2(@ModelAttribute("item") Item item, Model model){
         itemRepository.save(item);
-        /** 저장된 결과물만 넘겨주면 됨 **/
+        /** 저장된 결과물만 넘겨주면 됨 @ModelAttribute 생략시 클래스명(Item)의 앞글자만소문자로 바꿔서 Attribute로 사용**/
 //        model.addAttribute("item", item);//자동 추가, 생략 가능
         return "basic/item";
     }
@@ -68,18 +68,22 @@ public class BasicItemController {
         itemRepository.save(item);
         return "basic/item";
     }
-    /** PRG - Post/Redirect/Get **/
+    /** PRG - Post/Redirect/Get
+     * URL에 인코딩 해서 넘겨야 하는 문제가 있어 (item.getId()) **/
 //    @PostMapping("/add")
     public String addItemV5(@ModelAttribute("item") Item item){
         itemRepository.save(item);
         return "redirect:/basic/items/"+item.getId();
     }
-    /** RedirectAttribute 사용 **/
+    /** RedirectAttribute 사용
+     *  return 에 담아서  **/
     @PostMapping("/add")
     public String addItemV6(Item item, RedirectAttributes redirectAttributes){
         itemRepository.save(item);
+        //== redirect와 관련된 Attribute를 넣을 수 있어 ==//
         redirectAttributes.addAttribute("itemId", item.getId());
         redirectAttributes.addAttribute("status", true);
+        /** status 같이 {} 에 못들어간 녀석은 쿼리파라미터로 넘어가게된다 ( ~~{itemId}?status=true ) **/
         return "redirect:/basic/items/{itemId}";
     }
 
